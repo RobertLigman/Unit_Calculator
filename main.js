@@ -5,7 +5,7 @@ const btn = document.querySelector('.calc');
 const output = document.querySelector('.output');
 const chooseButtons = document.querySelectorAll('.main')
 const buttonArray = ['meter']
-
+const optionsArr = Array.from(select.children);
 
 function generateObjects(value) {
     switch (value.toLowerCase()) {
@@ -22,10 +22,20 @@ function generateObjects(value) {
 
 const temperature = {
     option: ['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'],
-    temperature: 10,
+    calculateFromThisObject() {
+        return 'jakies cos innego';
+    }
 }
 const meter = {
-    option: ['Kilometry na Mile', 'Mile na Kilometry']
+    option: ['Kilometry na Mile', 'Mile na Kilometry'],
+    calculateFromThisObject(inputValue) {
+
+        if (inputValue && select.value == 'toMiles') {
+
+            return (inputValue / 1.609344).toFixed(4);
+
+        }
+    }
 }
 const calculateLenghtUnit = (inputValue) => {
 
@@ -44,7 +54,13 @@ const calculateLenghtUnit = (inputValue) => {
 
 const calculate = () => {
 
-    if (chooseButtons[0].classList.contains('active') && chooseButtons[0].id === buttonArray[0]) { calculateLenghtUnit(input.value); }
+    // if (chooseButtons[0].classList.contains('active') && chooseButtons[0].id === buttonArray[0]) { calculateLenghtUnit(input.value); }
+    chooseButtons.forEach(el => {
+        if (el.classList.contains('active')) {
+            let actionToCalculate = generateObjects(el.textContent);
+            output.textContent = actionToCalculate.calculateFromThisObject(input.value);
+        }
+    });
 
 
 }
@@ -52,8 +68,14 @@ chooseButtons.forEach(el => {
 
     el.addEventListener('click', function() {
         console.log(this)
-            // console.log(this.el.id.option[1])
-        const optionsArr = Array.from(select.children);
+        chooseButtons.forEach(item => {
+            item.classList.remove('active');
+        })
+        el.classList.add('active');
+
+
+        // console.log(this.el.id.option[1])
+
         optionsArr.forEach((item, index) => {
             // console.log(this.textContent);
             let options = generateObjects(this.textContent);
