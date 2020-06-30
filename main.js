@@ -1,6 +1,5 @@
 const input = document.querySelector('input');
 const select = document.querySelector('select');
-// console.log(select.value);
 const btn = document.querySelector('.calc');
 const output = document.querySelector('.output');
 const chooseButtons = document.querySelectorAll('.main')
@@ -77,19 +76,19 @@ meter.formulaForSecondValue = function(inputValue) {
 //     }
 // }
 
-const calculateLenghtUnit = (inputValue) => {
+// const calculateLenghtUnit = (inputValue) => {
 
-    let outputValue;
-    if (select.value == "toMiles") {
-        console.log('Zamieniam na mile');
-        outputValue = (inputValue / 1.609344).toFixed(4);
-        output.textContent = outputValue;
+//     let outputValue;
+//     if (select.value == "toMiles") {
+//         console.log('Zamieniam na mile');
+//         outputValue = (inputValue / 1.609344).toFixed(4);
+//         output.textContent = outputValue;
 
-    } else {
-        outputValue = (inputValue * 1.609344).toFixed(4);
-        output.textContent = outputValue;
-    }
-}
+//     } else {
+//         outputValue = (inputValue * 1.609344).toFixed(4);
+//         output.textContent = outputValue;
+//     }
+// }
 
 
 const calculate = () => {
