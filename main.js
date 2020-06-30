@@ -22,21 +22,37 @@ function generateObjects(value) {
 
 const temperature = {
     option: ['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'],
-    calculateFromThisObject() {
-        return 'jakies cos innego';
-    }
-}
-const meter = {
-    option: ['Kilometry na Mile', 'Mile na Kilometry'],
+    value: ['toFahrenheit', 'toCelsius'],
     calculateFromThisObject(inputValue) {
 
-        if (inputValue && select.value == 'toMiles') {
+        if (inputValue && select.value == this.value[0]) {
 
-            return (inputValue / 1.609344).toFixed(4);
+            return (inputValue * 1.8 + 32).toFixed(2);
+
+        } else if (inputValue && select.value == this.value[1]) {
+
+            return ((inputValue - 32) / 1.8).toFixed(2);
 
         }
     }
 }
+const meter = {
+    option: ['Kilometry na Mile', 'Mile na Kilometry'],
+    value: ['toMiles', 'toKiloMeters'],
+    calculateFromThisObject(inputValue) {
+
+        if (inputValue && select.value == this.value[0]) {
+
+            return (inputValue / 1.609344).toFixed(4);
+
+        } else if (inputValue && select.value == this.value[1]) {
+
+            return (inputValue * 1.609344).toFixed(4);
+
+        }
+    }
+}
+
 const calculateLenghtUnit = (inputValue) => {
 
     let outputValue;
@@ -80,6 +96,7 @@ chooseButtons.forEach(el => {
             // console.log(this.textContent);
             let options = generateObjects(this.textContent);
             item.textContent = options.option[index];
+            item.value = options.value[index];
             // item.textContent = temperature.option[index];
             // =temperature.index
         })
