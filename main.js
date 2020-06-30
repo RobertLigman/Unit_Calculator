@@ -19,39 +19,63 @@ function generateObjects(value) {
             }
     }
 }
+const temperature = new Unit(['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'], ['toFahrenheit', 'toCelsius']);
+temperature.formulaForFirstValue = function(inputValue) {
+    return (inputValue * 1.8 + 32)
+};
+temperature.formulaForSecondValue = function(inputValue) {
+    return (inputValue - 32) / 1.8;
+};
 
-const temperature = {
-    option: ['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'],
-    value: ['toFahrenheit', 'toCelsius'],
-    calculateFromThisObject(inputValue) {
 
-        if (inputValue && select.value == this.value[0]) {
+// const temperature = {
+//     option: ['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'],
+//     value: ['toFahrenheit', 'toCelsius'],
+//     formulaForFirstValue(inputValue) {
+//         return (inputValue * 1.8 + 32)
+//     },
+//     formulaForSecondValue(inputValue) {
+//         return (inputValue - 32) / 1.8;
+//     },
+//     calculateFromThisObject(inputValue) {
+//         if (inputValue) {
+//             if (select.value == this.value[0]) {
 
-            return (inputValue * 1.8 + 32).toFixed(2);
+//                 return this.formulaForFirstValue(inputValue).toFixed(2);
 
-        } else if (inputValue && select.value == this.value[1]) {
+//             } else if (select.value == this.value[1]) {
 
-            return ((inputValue - 32) / 1.8).toFixed(2);
+//                 return this.formulaForSecondValue(inputValue).toFixed(2);
 
-        }
-    }
+//             }
+//         }
+//     }
+// }
+
+const meter = new Unit(['Kilometry na Mile', 'Mile na Kilometry'], ['toMiles', 'toKiloMeters']);
+meter.formulaForFirstValue = function(inputValue) {
+    return inputValue / 1.609344;
 }
-const meter = {
-    option: ['Kilometry na Mile', 'Mile na Kilometry'],
-    value: ['toMiles', 'toKiloMeters'],
-    calculateFromThisObject(inputValue) {
-
-        if (inputValue && select.value == this.value[0]) {
-
-            return (inputValue / 1.609344).toFixed(4);
-
-        } else if (inputValue && select.value == this.value[1]) {
-
-            return (inputValue * 1.609344).toFixed(4);
-
-        }
+meter.formulaForSecondValue = function(inputValue) {
+        return inputValue * 1.609344;
     }
-}
+    // const meter = {
+    //     option: ['Kilometry na Mile', 'Mile na Kilometry'],
+    //     value: ['toMiles', 'toKiloMeters'],
+    //     calculateFromThisObject(inputValue) {
+    //         if (inputValue) {
+    //             if (select.value == this.value[0]) {
+
+//                 return (inputValue / 1.609344).toFixed(4);
+
+//             } else if (select.value == this.value[1]) {
+
+//                 return (inputValue * 1.609344).toFixed(4);
+
+//             }
+//         }
+//     }
+// }
 
 const calculateLenghtUnit = (inputValue) => {
 
