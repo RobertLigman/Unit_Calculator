@@ -16,6 +16,10 @@ function generateObjects(value) {
             {
                 return meter;
             }
+        case 'weight':
+            {
+                return weight;
+            }
     }
 }
 const temperature = new Unit(['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'], ['toFahrenheit', 'toCelsius']);
@@ -26,19 +30,25 @@ temperature.formulaForSecondValue = function(inputValue) {
     return (inputValue - 32) / 1.8;
 };
 
-
-// const temperature = {
-//     option: ['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'],
-//     value: ['toFahrenheit', 'toCelsius'],
-//     formulaForFirstValue(inputValue) {
-//         return (inputValue * 1.8 + 32)
-//     },
-//     formulaForSecondValue(inputValue) {
-//         return (inputValue - 32) / 1.8;
-//     },
-//     calculateFromThisObject(inputValue) {
-//         if (inputValue) {
-//             if (select.value == this.value[0]) {
+const weight = new Unit(['Kliogramy na funty', 'Funty na kilogramy'], ['toPounds', 'toKilograms']);
+weight.formulaForFirstValue = function(inputValue) {
+    return inputValue * 2.20462262185;
+}
+weight.formulaForSecondValue = function(inputValue) {
+        return inputValue / 2.20462262185;
+    }
+    // const temperature = {
+    //     option: ['Celsjusz na Fahrenheit', 'Fahrenheit na Celsjusz'],
+    //     value: ['toFahrenheit', 'toCelsius'],
+    //     formulaForFirstValue(inputValue) {
+    //         return (inputValue * 1.8 + 32)
+    //     },
+    //     formulaForSecondValue(inputValue) {
+    //         return (inputValue - 32) / 1.8;
+    //     },
+    //     calculateFromThisObject(inputValue) {
+    //         if (inputValue) {
+    //             if (select.value == this.value[0]) {
 
 //                 return this.formulaForFirstValue(inputValue).toFixed(2);
 
@@ -91,13 +101,14 @@ meter.formulaForSecondValue = function(inputValue) {
 // }
 
 
-const calculate = () => {
+const renderOutput = () => {
 
     // if (chooseButtons[0].classList.contains('active') && chooseButtons[0].id === buttonArray[0]) { calculateLenghtUnit(input.value); }
     chooseButtons.forEach(el => {
         if (el.classList.contains('active')) {
             let actionToCalculate = generateObjects(el.textContent);
-            output.textContent = actionToCalculate.calculateFromThisObject(input.value);
+            output.value = actionToCalculate.calculateFromThisObject(input.value);
+            input.value = '';
         }
     });
 
@@ -106,7 +117,7 @@ const calculate = () => {
 chooseButtons.forEach(el => {
 
     el.addEventListener('click', function() {
-        console.log(this)
+        // console.log(this)
         chooseButtons.forEach(item => {
             item.classList.remove('active');
         })
@@ -125,4 +136,4 @@ chooseButtons.forEach(el => {
         })
     })
 })
-btn.addEventListener('click', calculate);
+btn.addEventListener('click', renderOutput);
