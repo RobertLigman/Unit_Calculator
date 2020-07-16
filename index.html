@@ -14,16 +14,22 @@
         <button class="main" id='temperature'>temperature</button>
         <button class="main" id='weight'>weight</button>
     </nav>
+    <section class="converter">
+        <input id='main-input' type="number" placeholder="Wpisz wartość">
+        <label for="choose">Wybierz opcję:</label>
 
-    <input type="number" placeholder="Wpisz wartość">
-    <label for="choose">Wybierz opcję:</label>
+        <select name="choose" id="choose">
+      <option value="toMiles">Kilometry na Mile</option>
+      <option value="toKiloMeters">Mile na Kilometry</option>
+        </select>
+        <div class="score">
+            <button class="calc">Oblicz</button>
+            <input class="output" type="text" readonly>
+        </div>
 
-    <select name="choose" id="choose">
-  <option value="toMiles">Kilometry na Mile</option>
-  <option value="toKiloMeters">Mile na Kilometry</option>
-    </select>
-    <button class="calc">Oblicz</button>
-    <input class="output" type="text" readonly>
+
+    </section>
+
     <script src="Unit.js"></script>
     <script src="main.js"></script>
 </body>
